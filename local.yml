@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  fast_api:
+    build:
+      context: .
+      dockerfile: ./compose/local/Dockerfile
+    container_name: 'fastAPI'
+    ports:
+      - '8000:8000'
+    depends_on:
+      - mongo
+  mongo:
+    image: 'mongo'
+    container_name: 'mongo'
+    volumes:
+      - ./mongo_db:/data/db
+    ports:
+      - '27017:27017'
