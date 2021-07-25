@@ -1,13 +1,13 @@
 from typing import Optional
-from datetime import date
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
+import datetime
 
 class UserSchema(BaseModel):
-    fullname: str 
-    email: EmailStr 
-    country: str 
-    date: date 
-    cell_phone: str 
+    fullname: str = Field(..., max_length=100)
+    email: EmailStr = Field(...)
+    country: str = Field(...) 
+    date: datetime.date = Field(...) 
+    cellphone: str = Field(...) 
 
     class Config:
         schema_extra = {
@@ -16,7 +16,7 @@ class UserSchema(BaseModel):
                 'email': 'john@example.com',
                 'country':  'United States',
                 'date': '1999-01-13',
-                'cell_phone':   '(185)-561-7071',
+                'cellphone':'(185)-561-7071',
             }
         }
 
@@ -24,8 +24,8 @@ class UpdateUserModel(BaseModel):
     fullname: Optional[str]
     email: Optional[str]
     country: Optional[EmailStr]
-    date: Optional[date] 
-    cell_phone: Optional[str]
+    date: Optional[datetime.date] 
+    cellphone: Optional[str]
 
     class Config:
         schema_extra = {
@@ -34,7 +34,7 @@ class UpdateUserModel(BaseModel):
                 'email': 'john@example.com',
                 'country':  'United States',
                 'date': '1999-01-13',
-                'cell_phone':   '(185)-561-7071',
+                'cellphone':'(185)-561-7071',
             }
         }
 

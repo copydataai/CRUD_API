@@ -1,13 +1,13 @@
 import motor.motor_asyncio
 from bson.objectid import ObjectId
 
-MONGO_DETAILS = 'mongodb://localhost:27017'
+MONGO_DETAILS = 'mongodb://root:root_2021@mongo:27017'
 
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
 
-database = client.users
+db = client.users
 
-users_collection = database.get_collection('users_collection')
+users_collection = db.get_collection('users_collection')
 
 # Retrieve all users present in the database
 async def retrieve_users():
@@ -35,10 +35,10 @@ async def update_user(id: str, data: dict):
         return False
     user = await users_collection.find_one({'_id': ObjectId(id)})
     if user:
-        updated_student = await users_collection.update_one(
+        updated_user = await users_collection.update_one(
             {'_id': ObjectId(id)}, {'$set': data}
         )
-        if updated_student:
+        if updated_user:
             return True
         return False
 
