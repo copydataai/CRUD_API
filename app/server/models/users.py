@@ -22,9 +22,9 @@ class UserSchema(BaseModel):
 
 class UpdateUserModel(BaseModel):
     fullname: Optional[str]
-    email: Optional[str]
-    country: Optional[EmailStr]
-    date: Optional[datetime.date] 
+    email: Optional[EmailStr]
+    country: Optional[str]
+    date: Optional[str] 
     cellphone: Optional[str]
 
     class Config:
